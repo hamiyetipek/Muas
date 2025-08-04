@@ -1,2 +1,0 @@
-# Muas
-ekip calısması
