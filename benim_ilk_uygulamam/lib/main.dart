@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/Notification.dart'; // Dosya adındaki büyük harfe dikkat et!
+import 'screens/ProfilSayfasi.dart'; // Dosya adındaki büyük harfe dikkat et!
 import "package:benim_ilk_uygulamam/screens/food_status_page.dart";
 
 void main() {
@@ -11,7 +12,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: NotificationPage(), // Burada NotificationPage'i çağırıyoruz
+      home: ProfilSayfasi(), // Burada NotificationPage'i çağırıyoruz
+      debugShowCheckedModeBanner: false,
+
     );
   }
 }
