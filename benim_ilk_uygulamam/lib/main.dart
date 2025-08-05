@@ -1,3 +1,4 @@
+import 'package:benim_ilk_uygulamam/screens/QrOkutucu.dart';
 import 'package:flutter/material.dart';
 import 'screens/Notification.dart'; // Dosya adındaki büyük harfe dikkat et!
 import 'screens/israfsayfasi.dart'; // Dosya adındaki büyük harfe dikkat et!
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: IsrafBilgiSayfasi(), // Burada NotificationPage'i çağırıyoruz
+      home: QrOkutucuSayfasi(), // Burada NotificationPage'i çağırıyoruz
       debugShowCheckedModeBanner: false,
 
     );
