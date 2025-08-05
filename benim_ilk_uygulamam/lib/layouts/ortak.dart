@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'sidebar.dart';
+import 'package:benim_ilk_uygulamam/screens/israfsayfasi.dart';
+import 'package:benim_ilk_uygulamam/screens/food_status_page.dart';
+import 'package:benim_ilk_uygulamam/screens/Notification.dart';
+import 'package:benim_ilk_uygulamam/screens/ProfilSayfasi.dart';
 
 class OrtakLayout extends StatelessWidget {
   final Widget child;
-  final Function(int)? onFooterIconTap; // Footer ikon tıklama callback
-  final int selectedIndex; // Footer seçili ikon indeksi
+  final int selectedIndex;
 
   const OrtakLayout({
     required this.child,
-    this.onFooterIconTap,
     this.selectedIndex = 0,
     Key? key,
   }) : super(key: key);
@@ -15,19 +18,19 @@ class OrtakLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // AppBar - %20 yükseklik için PreferredSize kullandık
+      drawer: const MySidebar(),
       appBar: PreferredSize(
         preferredSize:
             Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
         child: AppBar(
           backgroundColor: Colors.blue,
-          leading: IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: () {
-              // Menü ikonuna tıklama işlemi
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text('Menü tıklandı')));
-            },
+          leading: Builder(
+            builder: (context) => IconButton(
+              icon: Icon(Icons.menu),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            ),
           ),
           title: Container(
             height: 40,
@@ -49,7 +52,6 @@ class OrtakLayout extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.notifications),
               onPressed: () {
-                // Bildirim ikonuna tıklama
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: Text('Bildirim tıklandı')));
               },
@@ -57,33 +59,48 @@ class OrtakLayout extends StatelessWidget {
           ],
         ),
       ),
-
       body: child,
-
-      // Footer - %25 yükseklik için Container kullandık
       bottomNavigationBar: Container(
         height: MediaQuery.of(context).size.height * 0.15,
         color: Colors.blue,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            footerIcon(Icons.home, 0, 'Anasayfa'),
-            footerIcon(Icons.book, 1, 'Kitap'),
-            footerIcon(Icons.add, 2, 'Ekle'),
-            footerIcon(Icons.person, 3, 'Profil'),
+            footerIcon(context, Icons.home, 0, 'Anasayfa'),
+            footerIcon(context, Icons.book, 1, 'Ürünler'),
+            footerIcon(context, Icons.add, 2, 'Ekle'),
+            footerIcon(context, Icons.person, 3, 'Profil'),
           ],
         ),
       ),
     );
   }
 
-  Widget footerIcon(IconData icon, int index, String label) {
+  Widget footerIcon(
+      BuildContext context, IconData icon, int index, String label) {
     final isSelected = selectedIndex == index;
 
     return GestureDetector(
       onTap: () {
-        if (onFooterIconTap != null) {
-          onFooterIconTap!(index);
+        // Sayfa yönlendirmeleri burada
+        switch (index) {
+          case 0:
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (_) => IsrafBilgiSayfasi()));
+            break;
+          case 1:
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (_) => FoodStatusPage()));
+            break;
+          case 2:
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Bu özellik yakında eklenecek")),
+            );
+            break;
+          case 3:
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (_) => ProfilSayfasi()));
+            break;
         }
       },
       child: Column(
@@ -93,9 +110,10 @@ class OrtakLayout extends StatelessWidget {
           Icon(icon,
               color: isSelected ? Colors.white : Colors.white70, size: 32),
           SizedBox(height: 4),
-          Text(label,
-              style:
-                  TextStyle(color: isSelected ? Colors.white : Colors.white70)),
+          Text(
+            label,
+            style: TextStyle(color: isSelected ? Colors.white : Colors.white70),
+          ),
         ],
       ),
     );
