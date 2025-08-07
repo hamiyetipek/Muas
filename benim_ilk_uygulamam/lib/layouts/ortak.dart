@@ -5,6 +5,7 @@ import 'package:benim_ilk_uygulamam/screens/food_status_page.dart';
 import 'package:benim_ilk_uygulamam/screens/Notification.dart';
 import 'package:benim_ilk_uygulamam/screens/ProfilSayfasi.dart';
 import 'package:benim_ilk_uygulamam/screens/QrOkutucu.dart'; // QR kod sayfan varsa bunu ekle
+import 'package:benim_ilk_uygulamam/screens/urun_ekleme.dart'; // Ürün ekleme sayfası
 
 class OrtakLayout extends StatefulWidget {
   final Widget child;
@@ -160,8 +161,9 @@ class _OrtakLayoutState extends State<OrtakLayout> {
                   context, MaterialPageRoute(builder: (_) => FoodStatusPage()));
               break;
             case 3:
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text("Bu özellik yakında eklenecek")),
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => UrunEklemeSayfasi()),
               );
               break;
             case 4:

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:benim_ilk_uygulamam/screens/ProfilSayfasi.dart';
 import 'package:benim_ilk_uygulamam/screens/Notification.dart';
+import 'package:benim_ilk_uygulamam/screens/HakkimizdaSayfasi.dart';
 
 class MySidebar extends StatelessWidget {
   const MySidebar({Key? key}) : super(key: key);
@@ -36,6 +37,10 @@ class MySidebar extends StatelessWidget {
             title: Text('Hakkımızda'),
             onTap: () {
               Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HakkimizdaSayfasi()),
+              );
             },
           ),
           ListTile(
