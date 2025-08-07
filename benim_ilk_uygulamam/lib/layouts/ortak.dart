@@ -6,14 +6,19 @@ import 'package:benim_ilk_uygulamam/screens/Notification.dart';
 import 'package:benim_ilk_uygulamam/screens/ProfilSayfasi.dart';
 import 'package:benim_ilk_uygulamam/screens/QrOkutucu.dart'; // QR kod sayfan varsa bunu ekle
 import 'package:benim_ilk_uygulamam/screens/urun_ekleme.dart'; // Ürün ekleme sayfası
+import 'package:benim_ilk_uygulamam/screens/Anasayfa.dart';
+import 'package:benim_ilk_uygulamam/screens/Ayarlar.dart';
+import 'package:benim_ilk_uygulamam/main.dart';
 
 class OrtakLayout extends StatefulWidget {
   final Widget child;
   final int selectedIndex;
+  final VoidCallback? onThemeChanged; // <-- add this
 
   const OrtakLayout({
     required this.child,
     this.selectedIndex = 0,
+    this.onThemeChanged, // <-- add this
     Key? key,
   }) : super(key: key);
 
@@ -27,7 +32,7 @@ class _OrtakLayoutState extends State<OrtakLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const MySidebar(),
+      drawer: MySidebar(onThemeChanged: widget.onThemeChanged), // <-- pass here
       appBar: PreferredSize(
         preferredSize:
             Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
@@ -154,8 +159,12 @@ class _OrtakLayoutState extends State<OrtakLayout> {
           switch (index) {
             case 0:
               Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (_) => IsrafBilgiSayfasi()));
+                  MaterialPageRoute(builder: (_) => AnasayfaWrapper()));
               break;
+            //case 0:
+            //Navigator.pushReplacement(context,
+            //  MaterialPageRoute(builder: (_) => IsrafBilgiSayfasi()));
+            //break;
             case 1:
               Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (_) => FoodStatusPage()));

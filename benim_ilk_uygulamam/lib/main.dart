@@ -48,9 +48,9 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       themeMode: _isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      home: Anasayfa(
-        onThemeChanged: _reloadTheme, // <-- Pass the callback
-      ), // Burada NotificationPage'i çağırıyoruz
+      home: AnasayfaWrapper(
+        onThemeChanged: _reloadTheme, 
+      ), 
       debugShowCheckedModeBanner: false,
     );
   }
