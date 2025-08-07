@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:benim_ilk_uygulamam/screens/ProfilSayfasi.dart';
 import 'package:benim_ilk_uygulamam/screens/Notification.dart';
 import 'package:benim_ilk_uygulamam/screens/HakkimizdaSayfasi.dart';
+import 'package:benim_ilk_uygulamam/screens/Ayarlar.dart';
 
 class MySidebar extends StatelessWidget {
-  const MySidebar({Key? key}) : super(key: key);
+  final VoidCallback? onThemeChanged;
+  const MySidebar({Key? key, this.onThemeChanged}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +76,14 @@ class MySidebar extends StatelessWidget {
             title: Text('Ayarlar'),
             onTap: () {
               Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Ayarlar(
+                    onThemeChanged: onThemeChanged, // Pass it here
+                  ),
+                ),
+              );
             },
           ),
         ],
