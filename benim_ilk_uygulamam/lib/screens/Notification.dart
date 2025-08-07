@@ -5,8 +5,8 @@ class NotificationPage extends StatelessWidget {
   final List<String> notifications = [
     "İletişim bilgilerini güncelleyerek hesabnı güvende tutabilirsin",
     "Yeni israf haberlerimiz yaynda incelemeye ne dersin!",
-    "Senin inin oluşturduğumuz tarifleri inceledin mi?",
-    "Dolptaki sütü BUGÜN değerlendirmezsen yarın çok geç olabilir",
+    "Senin için oluşturduğumuz tarifleri inceledin mi?",
+    "Dolaptaki sütü BUGÜN değerlendirmezsen yarın çok geç olabilir",
   ];
 
   @override
