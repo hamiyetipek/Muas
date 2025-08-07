@@ -4,6 +4,7 @@ import 'screens/Notification.dart'; // Dosya adındaki büyük harfe dikkat et!
 import 'screens/israfsayfasi.dart'; // Dosya adındaki büyük harfe dikkat et!
 import 'screens/ProfilSayfasi.dart'; // Dosya adındaki büyük harfe dikkat et!
 import "package:benim_ilk_uygulamam/screens/food_status_page.dart";
+import 'package:benim_ilk_uygulamam/screens/auth/welcomepage.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,9 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: QrOkutucuSayfasi(), // Burada NotificationPage'i çağırıyoruz
+      home: WelcomePage(), // Burada NotificationPage'i çağırıyoruz
       debugShowCheckedModeBanner: false,
-
     );
   }
 }
