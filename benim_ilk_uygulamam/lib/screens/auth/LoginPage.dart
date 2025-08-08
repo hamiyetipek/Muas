@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:benim_ilk_uygulamam/screens/israfsayfasi.dart';
+import 'package:benim_ilk_uygulamam/screens/Anasayfa.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
       if (username == "1" && password == "1") {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (_) => IsrafBilgiSayfasi()),
+          MaterialPageRoute(builder: (_) => AnasayfaWrapper()),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(

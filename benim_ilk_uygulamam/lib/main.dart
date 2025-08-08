@@ -9,6 +9,7 @@ import 'screens/urun_ekleme.dart'; // Dosya adındaki büyük harfe dikkat et!
 import 'screens/ShopingList.dart';
 import 'screens/Anasayfa.dart';
 import 'package:benim_ilk_uygulamam/screens/RecipeBook.dart';
+import 'package:benim_ilk_uygulamam/screens/auth/welcomepage.dart';
 
 void main() {
   runApp(MyApp());
@@ -47,9 +48,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Muas',
       theme: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
-      home: AnasayfaWrapper(
-        onThemeChanged: _reloadTheme,
-      ),
+      home: const WelcomePage(), // Burayı WelcomePage olarak değiştirdik
       debugShowCheckedModeBanner: false,
     );
   }
