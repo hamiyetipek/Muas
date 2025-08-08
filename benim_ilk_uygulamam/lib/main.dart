@@ -1,10 +1,14 @@
 import 'package:benim_ilk_uygulamam/screens/QrOkutucu.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/Notification.dart'; // Dosya adındaki büyük harfe dikkat et!
 import 'screens/israfsayfasi.dart'; // Dosya adındaki büyük harfe dikkat et!
 import 'screens/ProfilSayfasi.dart'; // Dosya adındaki büyük harfe dikkat et!
 import "package:benim_ilk_uygulamam/screens/food_status_page.dart";
 import 'screens/urun_ekleme.dart'; // Dosya adındaki büyük harfe dikkat et!
+import 'screens/ShopingList.dart';
+import 'screens/Anasayfa.dart';
+import 'package:benim_ilk_uygulamam/screens/RecipeBook.dart';
 
 void main() {
   runApp(MyApp());
@@ -41,20 +45,12 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-<<<<<<< HEAD
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Alışveriş Listesi',
-      home: ShoppingListPage(),   // Burada sayfanı çağırdın
-=======
-      title: 'Flutter Demo',
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
-      themeMode: _isDarkMode ? ThemeMode.dark : ThemeMode.light,
+      title: 'Muas',
+      theme: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
       home: AnasayfaWrapper(
         onThemeChanged: _reloadTheme,
       ),
       debugShowCheckedModeBanner: false,
-
     );
   }
 }

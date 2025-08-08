@@ -8,6 +8,8 @@ import 'Notification.dart';
 import 'ProfilSayfasi.dart';
 import 'QrOkutucu.dart'; // QR kod sayfan varsa bunu ekle
 import 'urun_ekleme.dart'; // Ürün ekleme sayfası
+import 'RecipeBook.dart';
+import 'ShopingList.dart';
 
 class AnasayfaWrapper extends StatelessWidget {
   final VoidCallback? onThemeChanged;
@@ -17,7 +19,7 @@ class AnasayfaWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return OrtakLayout(
       selectedIndex: 0,
-      onThemeChanged: onThemeChanged, 
+      onThemeChanged: onThemeChanged,
       child: Anasayfa(),
     );
   }
@@ -93,7 +95,7 @@ class _AnasayfaState extends State<Anasayfa> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => IsrafBilgiSayfasi(), // Your existing page
+        builder: (context) => IsrafBilgiSayfasi(),
       ),
     );
   }
@@ -318,13 +320,25 @@ class _AnasayfaState extends State<Anasayfa> {
                           icon: Icons.book,
                           title: 'Tarif Defteri',
                           color: const Color(0xFF4CAF50),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RecipeBookPage()),
+                            );
+                          },
                         ),
                         _buildQuickActionCard(
                           icon: Icons.shopping_cart,
                           title: 'Alışveriş Listesi',
                           color: const Color(0xFF2196F3),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ShoppingListPage()),
+                            );
+                          },
                         ),
                       ],
                     ),

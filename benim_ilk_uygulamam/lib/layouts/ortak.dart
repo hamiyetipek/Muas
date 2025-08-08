@@ -13,12 +13,12 @@ import 'package:benim_ilk_uygulamam/main.dart';
 class OrtakLayout extends StatefulWidget {
   final Widget child;
   final int selectedIndex;
-  final VoidCallback? onThemeChanged; 
+  final VoidCallback? onThemeChanged;
 
   const OrtakLayout({
     required this.child,
     this.selectedIndex = 0,
-    this.onThemeChanged, 
+    this.onThemeChanged,
     Key? key,
   }) : super(key: key);
 
@@ -32,7 +32,7 @@ class _OrtakLayoutState extends State<OrtakLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MySidebar(onThemeChanged: widget.onThemeChanged), 
+      drawer: MySidebar(onThemeChanged: widget.onThemeChanged),
       appBar: PreferredSize(
         preferredSize:
             Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
