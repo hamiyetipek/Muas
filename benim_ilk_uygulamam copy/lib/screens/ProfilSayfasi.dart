@@ -27,7 +27,7 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
   @override
   Widget build(BuildContext context) {
     return OrtakLayout(
-      selectedIndex: 4,
+      selectedIndex: 3,
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(

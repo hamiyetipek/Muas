@@ -12,7 +12,6 @@ class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   String username = '';
   String password = '';
-  bool isHovering = false; // Hover efekti için
 
   void _register() {
     if (_formKey.currentState!.validate()) {
@@ -131,35 +130,6 @@ class _RegisterPageState extends State<RegisterPage> {
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: isMobile ? 16 : 18,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: screenHeight * 0.02),
-
-                      // Zaten üye misiniz? linki
-                      MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        onEnter: (_) => setState(() => isHovering = true),
-                        onExit: (_) => setState(() => isHovering = false),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => const LoginPage(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            "Zaten üye misiniz? Tıklayınız",
-                            style: TextStyle(
-                              color: isHovering
-                                  ? Colors.deepPurple.shade700
-                                  : Colors.deepPurple,
-                              fontWeight: FontWeight.bold,
-                              fontSize: isMobile ? 14 : 16,
-                              decoration: TextDecoration.underline,
-                            ),
                           ),
                         ),
                       ),

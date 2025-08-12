@@ -1,3 +1,4 @@
+import 'RegisterPage.dart';
 import 'package:flutter/material.dart';
 import 'package:benim_ilk_uygulamam/screens/Anasayfa.dart';
 
@@ -12,6 +13,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   String username = '';
   String password = '';
+  bool isHovering = false; // Hover efekti için
 
   void _login() {
     if (_formKey.currentState!.validate()) {
@@ -120,6 +122,35 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: isMobile ? 16 : 18,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: screenHeight * 0.02),
+
+                      // Üye değil misiniz? linki
+                      MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        onEnter: (_) => setState(() => isHovering = true),
+                        onExit: (_) => setState(() => isHovering = false),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => RegisterPage(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "Üye değil misiniz? Tıklayınız",
+                            style: TextStyle(
+                              color: isHovering
+                                  ? Colors.deepPurple.shade700
+                                  : Colors.deepPurple,
+                              fontWeight: FontWeight.bold,
+                              fontSize: isMobile ? 14 : 16,
+                              decoration: TextDecoration.underline,
+                            ),
                           ),
                         ),
                       ),

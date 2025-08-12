@@ -1,48 +1,37 @@
 import 'package:flutter/material.dart';
-import 'LoginPage.dart';
+import 'package:benim_ilk_uygulamam/screens/Anasayfa.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   String username = '';
   String password = '';
-  bool isHovering = false; // Hover efekti için
 
-  void _register() {
+  void _login() {
     if (_formKey.currentState!.validate()) {
-      // Artık kullanıcı adı ve şifre ne olursa olsun kayıt başarılı
-      showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-          title: const Text("Kayıt Başarılı"),
-          content: const Text("Giriş yapabilirsiniz"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) => const LoginPage()),
-                );
-              },
-              child: const Text("Tamam"),
-            )
-          ],
-        ),
-      );
+      if (username == "1" && password == "1") {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => AnasayfaWrapper()),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Geçersiz kullanıcı adı veya şifre")),
+        );
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     final bool isMobile = screenWidth < 600;
 
     return Scaffold(
@@ -62,7 +51,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 SizedBox(height: screenHeight * 0.04),
                 Text(
-                  "Kayıt Ol",
+                  "Giriş Yap",
                   style: TextStyle(
                     fontSize: isMobile ? 24 : 30,
                     fontWeight: FontWeight.bold,
@@ -71,7 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 SizedBox(height: screenHeight * 0.015),
                 Text(
-                  "Yeni bir hesap oluşturmak için bilgilerinizi girin.",
+                  "Hesabınıza erişmek için bilgilerinizi girin.",
                   style: TextStyle(
                     fontSize: isMobile ? 14 : 16,
                     color: Colors.grey[700],
@@ -115,7 +104,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       SizedBox(height: screenHeight * 0.03),
                       ElevatedButton(
-                        onPressed: _register,
+                        onPressed: _login,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.deepPurple,
                           shape: RoundedRectangleBorder(
@@ -127,39 +116,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                         child: Text(
-                          "Kayıt Ol",
+                          "Giriş Yap",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: isMobile ? 16 : 18,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: screenHeight * 0.02),
-
-                      // Zaten üye misiniz? linki
-                      MouseRegion(
-                        cursor: SystemMouseCursors.click,
-                        onEnter: (_) => setState(() => isHovering = true),
-                        onExit: (_) => setState(() => isHovering = false),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => const LoginPage(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            "Zaten üye misiniz? Tıklayınız",
-                            style: TextStyle(
-                              color: isHovering
-                                  ? Colors.deepPurple.shade700
-                                  : Colors.deepPurple,
-                              fontWeight: FontWeight.bold,
-                              fontSize: isMobile ? 14 : 16,
-                              decoration: TextDecoration.underline,
-                            ),
                           ),
                         ),
                       ),

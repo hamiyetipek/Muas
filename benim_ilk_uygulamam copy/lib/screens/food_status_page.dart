@@ -16,7 +16,7 @@ class FoodStatusPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OrtakLayout(
-      selectedIndex: 1, 
+      selectedIndex: 0, // Alt bardaki aktif ikon (Anasayfa)
       child: SafeArea(
         child: ListView.builder(
           padding: EdgeInsets.only(bottom: 24),
