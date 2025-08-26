@@ -3,8 +3,6 @@ import 'package:benim_ilk_uygulamam/screens/ProfilSayfasi.dart';
 import 'package:benim_ilk_uygulamam/screens/Notification.dart';
 import 'package:benim_ilk_uygulamam/screens/HakkimizdaSayfasi.dart';
 import 'package:benim_ilk_uygulamam/screens/Ayarlar.dart';
-import 'package:benim_ilk_uygulamam/layouts/ortak.dart';
-import 'package:benim_ilk_uygulamam/screens/Anasayfa.dart';
 
 class MySidebar extends StatelessWidget {
   final VoidCallback? onThemeChanged;
@@ -45,20 +43,6 @@ class MySidebar extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => HakkimizdaSayfasi()),
               );
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.book),
-            title: Text('Tarif Defteri'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.list),
-            title: Text('Alışveriş Listesi'),
-            onTap: () {
-              Navigator.pop(context);
             },
           ),
           Divider(),
