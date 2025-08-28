@@ -99,11 +99,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+<<<<<<< HEAD
   flutter_web_plugins:
     dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
+=======
+>>>>>>> 8294ea8cae1c9ed3585a3412b74327b59b375f28
   font_awesome_flutter:
     dependency: "direct main"
     description:
@@ -112,6 +115,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "10.9.0"
+<<<<<<< HEAD
   http:
     dependency: "direct main"
     description:
@@ -128,6 +132,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
+=======
+>>>>>>> 8294ea8cae1c9ed3585a3412b74327b59b375f28
   leak_tracker:
     dependency: transitive
     description:

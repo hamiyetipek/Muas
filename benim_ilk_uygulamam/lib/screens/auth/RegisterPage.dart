@@ -12,7 +12,10 @@ class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   String username = '';
   String password = '';
+<<<<<<< HEAD
   bool isHovering = false; // Hover efekti için
+=======
+>>>>>>> 8294ea8cae1c9ed3585a3412b74327b59b375f28
 
   void _register() {
     if (_formKey.currentState!.validate()) {
@@ -134,6 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                       ),
+<<<<<<< HEAD
                       SizedBox(height: screenHeight * 0.02),
 
                       // Zaten üye misiniz? linki
@@ -163,6 +167,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                       ),
+=======
+>>>>>>> 8294ea8cae1c9ed3585a3412b74327b59b375f28
                     ],
                   ),
                 ),

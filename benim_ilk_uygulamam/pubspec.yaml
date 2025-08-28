@@ -12,9 +12,14 @@ dependencies:
   flutter:
     sdk: flutter
   carousel_slider: ^5.1.1
+<<<<<<< HEAD
   shared_preferences: ^2.2.2
   cupertino_icons: ^1.0.6
   font_awesome_flutter: ^10.5.0
+=======
+  cupertino_icons: ^1.0.6
+  font_awesome_flutter: ^10.5.0  
+>>>>>>> 8294ea8cae1c9ed3585a3412b74327b59b375f28
 
 dev_dependencies:
   flutter_test:
@@ -24,4 +29,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+<<<<<<< HEAD
     - assets/
+=======
+    - assets/
+>>>>>>> 8294ea8cae1c9ed3585a3412b74327b59b375f28

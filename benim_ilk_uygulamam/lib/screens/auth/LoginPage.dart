@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 import 'RegisterPage.dart';
 import 'package:flutter/material.dart';
 import 'package:benim_ilk_uygulamam/screens/Anasayfa.dart';
+=======
+import 'package:flutter/material.dart';
+import 'package:benim_ilk_uygulamam/screens/israfsayfasi.dart';
+>>>>>>> 8294ea8cae1c9ed3585a3412b74327b59b375f28
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -13,14 +18,21 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   String username = '';
   String password = '';
+<<<<<<< HEAD
   bool isHovering = false; // Hover efekti için
+=======
+>>>>>>> 8294ea8cae1c9ed3585a3412b74327b59b375f28
 
   void _login() {
     if (_formKey.currentState!.validate()) {
       if (username == "1" && password == "1") {
         Navigator.pushReplacement(
           context,
+<<<<<<< HEAD
           MaterialPageRoute(builder: (_) => AnasayfaWrapper()),
+=======
+          MaterialPageRoute(builder: (_) => IsrafBilgiSayfasi()),
+>>>>>>> 8294ea8cae1c9ed3585a3412b74327b59b375f28
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -125,6 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
+<<<<<<< HEAD
                       SizedBox(height: screenHeight * 0.02),
 
                       // Üye değil misiniz? linki
@@ -154,6 +167,8 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
+=======
+>>>>>>> 8294ea8cae1c9ed3585a3412b74327b59b375f28
                     ],
                   ),
                 ),
