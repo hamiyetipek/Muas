@@ -1,11 +1,9 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import '../layouts/ortak.dart';
 import 'package:benim_ilk_uygulamam/screens/Ayarlar.dart';
-import 'package:benim_ilk_uygulamam/screens/RecipeBook.dart'; 
+import 'package:benim_ilk_uygulamam/screens/RecipeBook.dart';
 import 'package:benim_ilk_uygulamam/screens/auth/LoginPage.dart';
-
+import 'package:benim_ilk_uygulamam/Services/user_service.dart';
 
 class ProfilSayfasi extends StatefulWidget {
   const ProfilSayfasi({Key? key}) : super(key: key);
@@ -15,6 +13,8 @@ class ProfilSayfasi extends StatefulWidget {
 }
 
 class _ProfilSayfasiState extends State<ProfilSayfasi> {
+  final UserService _userService = UserService();
+
   String kullaniciAdi = "";
   String eposta = "";
 
@@ -25,7 +25,6 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
   final TextEditingController _emailController = TextEditingController();
 
   final int userId = 1; // Test için kullanıcı ID
-  final String baseUrl = 'https://localhost:7214/api/Users';
 
   @override
   void initState() {
@@ -35,45 +34,31 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
 
   Future<void> _fetchUser() async {
     try {
-      final response = await http.get(Uri.parse('$baseUrl/$userId'));
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
+      final data = await _userService.fetchUser(userId);
+      if (data != null) {
         setState(() {
           kullaniciAdi = data['ad'];
           eposta = data['email'];
           _adController.text = kullaniciAdi;
           _emailController.text = eposta;
         });
-      } else {
-        debugPrint('Kullanıcı çekilemedi: ${response.statusCode}');
       }
     } catch (e) {
       debugPrint('Hata: $e');
     }
   }
 
-  // Alan bazlı güncelleme: sadece gönderilen alan backend'e yollanır
   Future<void> _updateUser({String? ad, String? email}) async {
     try {
-      final body = <String, String>{};
-      if (ad != null && ad.isNotEmpty) body['ad'] = ad;
-      if (email != null && email.isNotEmpty) body['email'] = email;
-
-      if (body.isEmpty) return; // boş istek gönderme
-
-      final response = await http.put(
-        Uri.parse('$baseUrl/$userId'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(body),
-      );
-
-      if (response.statusCode == 200) {
+      final success =
+          await _userService.updateUser(userId, ad: ad, email: email);
+      if (success) {
         ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text('Profil güncellendi!')));
         _fetchUser();
       } else {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Hata: ${response.body}')));
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Güncelleme başarısız!')));
       }
     } catch (e) {
       debugPrint('Hata: $e');
@@ -111,21 +96,22 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
           ElevatedButton(
             onPressed: () async {
               try {
-                final response = await http.post(
-                  Uri.parse('$baseUrl/$userId/change-password'),
-                  headers: {'Content-Type': 'application/json'},
-                  body: jsonEncode({
-                    'oldPassword': oldPasswordController.text,
-                    'newPassword': newPasswordController.text,
-                  }),
+                final errorMessage = await _userService.changePassword(
+                  userId,
+                  oldPasswordController.text,
+                  newPasswordController.text,
                 );
-                if (response.statusCode == 200) {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text('Şifre başarıyla değiştirildi!')));
+
+                if (errorMessage == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                        content: Text('Şifre başarıyla değiştirildi!')),
+                  );
                   Navigator.pop(context);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Hata: ${response.body}')));
+                    SnackBar(content: Text(errorMessage)),
+                  );
                 }
               } catch (e) {
                 debugPrint('Hata: $e');
@@ -165,8 +151,7 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
               controller: _adController,
               onEditToggle: () {
                 setState(() {
-                  if (isEditingAdi)
-                    _updateUser(ad: _adController.text); // sadece kullanıcı adı
+                  if (isEditingAdi) _updateUser(ad: _adController.text);
                   isEditingAdi = !isEditingAdi;
                 });
               },
@@ -180,8 +165,7 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
               controller: _emailController,
               onEditToggle: () {
                 setState(() {
-                  if (isEditingEmail)
-                    _updateUser(email: _emailController.text); // sadece email
+                  if (isEditingEmail) _updateUser(email: _emailController.text);
                   isEditingEmail = !isEditingEmail;
                 });
               },
@@ -197,7 +181,7 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
             _profileItem(Icons.receipt_long, 'Kayıtlı Tarifler', () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => RecipeBookPage()), 
+                MaterialPageRoute(builder: (_) => RecipeBookPage()),
               );
             }),
             _profileItem(Icons.logout, 'Çıkış', () {
