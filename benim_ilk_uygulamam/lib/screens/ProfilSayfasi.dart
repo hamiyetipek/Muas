@@ -50,15 +50,25 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
 
   Future<void> _updateUser({String? ad, String? email}) async {
     try {
-      final success =
-          await _userService.updateUser(userId, ad: ad, email: email);
+      // Eğer kullanıcı alanı boş ise eski değerini koru
+      final bodyAd = (ad == null || ad.trim().isEmpty) ? kullaniciAdi : ad.trim();
+      final bodyEmail = (email == null || email.trim().isEmpty) ? eposta : email.trim();
+
+      final success = await _userService.updateUser(
+        userId,
+        ad: bodyAd,
+        email: bodyEmail,
+      );
+
       if (success) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text('Profil güncellendi!')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Profil güncellendi!')),
+        );
         _fetchUser();
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Güncelleme başarısız!')));
+          const SnackBar(content: Text('Güncelleme başarısız!')),
+        );
       }
     } catch (e) {
       debugPrint('Hata: $e');
@@ -151,8 +161,10 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
               controller: _adController,
               onEditToggle: () {
                 setState(() {
-                  if (isEditingAdi) _updateUser(ad: _adController.text);
                   isEditingAdi = !isEditingAdi;
+                  if (!isEditingAdi) {
+                    _updateUser(ad: _adController.text);
+                  }
                 });
               },
             ),
@@ -165,8 +177,10 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
               controller: _emailController,
               onEditToggle: () {
                 setState(() {
-                  if (isEditingEmail) _updateUser(email: _emailController.text);
                   isEditingEmail = !isEditingEmail;
+                  if (!isEditingEmail) {
+                    _updateUser(email: _emailController.text);
+                  }
                 });
               },
             ),
@@ -221,7 +235,21 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
           IconButton(
             icon: Icon(isEditing ? Icons.check : Icons.edit,
                 color: Colors.deepPurple),
-            onPressed: onEditToggle,
+            onPressed: () {
+              if (isEditing) {
+                if (controller.text.trim().isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Profil bilgileri boş bırakılamaz!'),
+                    ),
+                  );
+                  return;
+                }
+                onEditToggle();
+              } else {
+                onEditToggle();
+              }
+            },
           ),
         ],
       ),
